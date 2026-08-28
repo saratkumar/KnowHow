@@ -1,0 +1,1495 @@
+<title>KnowHow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f3f4f8;
+    --paper-raised: #ffffff;
+    --ink: #1b2340;
+    --ink-soft: #4b5170;
+    --accent: #c97a1d;
+    --accent-deep: #8f5410;
+    --accent-tint: #f6e6cd;
+    --verified: #2f7b64;
+    --verified-tint: #dcefe7;
+    --line: rgba(27, 35, 64, 0.14);
+    --line-strong: rgba(27, 35, 64, 0.28);
+    --shadow: rgba(27, 35, 64, 0.08);
+    --focus: #2f5fd0;
+    --critical: #a3372f;
+    --critical-tint: #f5ddd9;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #12162a;
+      --paper-raised: #1a2038;
+      --ink: #eceef7;
+      --ink-soft: #b3b8d4;
+      --accent: #e8a04a;
+      --accent-deep: #f4c07d;
+      --accent-tint: #3a2c15;
+      --verified: #6bbfa2;
+      --verified-tint: #163229;
+      --line: rgba(236, 238, 247, 0.16);
+      --line-strong: rgba(236, 238, 247, 0.32);
+      --shadow: rgba(0, 0, 0, 0.35);
+      --focus: #7ea1ff;
+      --critical: #e8837a;
+      --critical-tint: #3a1e1b;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #12162a;
+    --paper-raised: #1a2038;
+    --ink: #eceef7;
+    --ink-soft: #b3b8d4;
+    --accent: #e8a04a;
+    --accent-deep: #f4c07d;
+    --accent-tint: #3a2c15;
+    --verified: #6bbfa2;
+    --verified-tint: #163229;
+    --line: rgba(236, 238, 247, 0.16);
+    --line-strong: rgba(236, 238, 247, 0.32);
+    --shadow: rgba(0, 0, 0, 0.35);
+    --focus: #7ea1ff;
+    --critical: #e8837a;
+    --critical-tint: #3a1e1b;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { color-scheme: light dark; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  h1, h2, h3 { font-family: "Source Serif 4", Georgia, "Times New Roman", serif; text-wrap: balance; margin: 0; }
+
+  .mono { font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace; }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Masthead ---------- */
+
+  .masthead {
+    border-bottom: 1px solid var(--line);
+    background: var(--paper-raised);
+  }
+
+  .masthead-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 28px 22px;
+  }
+
+  .masthead-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .brand-logo { flex: none; align-self: center; }
+
+  .brand-mark {
+    font-family: "Source Serif 4", serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .brand-mark span { color: var(--accent-deep); font-style: italic; }
+
+  .brand-tag {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.11em;
+    color: var(--ink-soft);
+    border-left: 1px solid var(--line-strong);
+    padding-left: 12px;
+  }
+
+  .masthead-meta {
+    display: flex;
+    gap: 18px;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    flex-wrap: wrap;
+  }
+
+  .masthead-meta strong { color: var(--verified); font-weight: 600; }
+
+  .masthead-lede {
+    max-width: 62ch;
+    margin-top: 18px;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+  }
+
+  /* Country rail */
+  .country-rail {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .country-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    font-size: 0.82rem;
+    font-weight: 500;
+    background: var(--paper);
+    color: var(--ink-soft);
+  }
+
+  .country-chip.active {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .country-chip.soon {
+    opacity: 0.55;
+    cursor: default;
+  }
+
+  /* ---------- Controls ---------- */
+
+  .controls {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(6px);
+  }
+
+  .controls-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 14px 28px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    flex: 1 1 240px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--paper-raised);
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    padding: 9px 12px;
+  }
+
+  .search-box svg { flex: none; opacity: 0.55; }
+
+  .search-box input {
+    border: none;
+    background: none;
+    outline: none;
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 0.92rem;
+    width: 100%;
+  }
+
+  .search-box input::placeholder { color: var(--ink-soft); }
+
+  .filter-chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    padding: 7px 11px;
+    border-radius: 6px;
+    border: 1px solid var(--line-strong);
+    background: var(--paper-raised);
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .chip:hover { border-color: var(--accent); color: var(--ink); }
+
+  .chip.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #201400;
+  }
+
+  .result-count {
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  /* ---------- Layout ---------- */
+
+  main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 30px 28px 60px;
+  }
+
+  .section {
+    margin-top: 44px;
+  }
+
+  .section:first-child { margin-top: 8px; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+  }
+
+  .section-head h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .section-count {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+  }
+
+  .section-note {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    margin: -6px 0 16px;
+    max-width: 68ch;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 16px;
+  }
+
+  /* ---------- Card ---------- */
+
+  .card {
+    position: relative;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 18px 18px 16px;
+    box-shadow: 0 1px 2px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 18px;
+    width: 34px;
+    height: 5px;
+    background: var(--accent);
+    border-radius: 0 0 2px 2px;
+  }
+
+  .card-emergency::before { background: var(--critical); }
+
+  .card-emergency .badge {
+    background: var(--critical-tint);
+    color: var(--critical);
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 6px;
+  }
+
+  .card h3 {
+    font-size: 1.06rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .badge {
+    flex: none;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 4px;
+    background: var(--verified-tint);
+    color: var(--verified);
+    white-space: nowrap;
+  }
+
+  .card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+
+  .card-meta b { color: var(--ink); font-weight: 500; }
+
+  .card-links {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .card-links a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--accent-deep);
+  }
+
+  .card-links a:hover { text-decoration: underline; }
+
+  .card-links a svg { flex: none; }
+
+  .card-links a.report-link {
+    color: var(--ink-soft);
+    font-size: 0.78rem;
+    font-weight: 500;
+    margin-top: 4px;
+    padding-top: 8px;
+    border-top: 1px dotted var(--line);
+  }
+
+  .card-links a.report-link:hover { color: var(--critical); }
+
+  .card[data-cat] { scroll-margin-top: 90px; }
+
+  .grid { align-items: start; }
+
+  /* ---------- How-to detail ---------- */
+
+  .card-detail { border-top: 1px dashed var(--line); margin-top: 2px; }
+
+  .detail-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 10px 0 2px;
+    margin: 0;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent-deep);
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .detail-toggle svg { transition: transform 0.15s ease; flex: none; }
+
+  .detail-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+  .detail-panel {
+    padding: 10px 0 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .detail-panel[hidden] { display: none; }
+
+  .detail-block h4 {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--ink-soft);
+    margin: 0 0 6px;
+    font-weight: 600;
+  }
+
+  .detail-block ol {
+    margin: 0;
+    padding-left: 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.85rem;
+    color: var(--ink);
+  }
+
+  .detail-block ol li::marker {
+    color: var(--accent-deep);
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-size: 0.8em;
+  }
+
+  .doc-list {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.85rem;
+    color: var(--ink);
+  }
+
+  .doc-list li { padding-left: 1.1em; position: relative; }
+
+  .doc-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--verified);
+  }
+
+  .condition-note { margin: 0; font-size: 0.83rem; color: var(--ink-soft); }
+
+  /* ---------- Notice ---------- */
+
+  .notice {
+    margin-top: 46px;
+    border: 1px solid var(--line-strong);
+    background: var(--paper-raised);
+    border-radius: 4px;
+    padding: 18px 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .notice svg { flex: none; margin-top: 2px; opacity: 0.7; }
+
+  .notice h4 {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+
+  .notice p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    max-width: 72ch;
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    border-top: 1px solid var(--line);
+    background: var(--paper-raised);
+  }
+
+  .footer-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 26px 28px 34px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+
+  .footer-inner a { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; }
+
+  .no-results {
+    display: none;
+    padding: 40px 0;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+  }
+
+  .no-results.show { display: block; }
+
+  @media (max-width: 560px) {
+    .masthead-inner, .controls-inner, main, .footer-inner { padding-left: 18px; padding-right: 18px; }
+    .brand-tag { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-top">
+      <div class="brand">
+        <svg class="brand-logo" width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect x="3" y="21" width="7" height="8" rx="1.5" style="fill:var(--accent)"/>
+          <rect x="12.5" y="14" width="7" height="15" rx="1.5" style="fill:var(--accent)"/>
+          <rect x="22" y="6" width="7" height="23" rx="1.5" style="fill:var(--accent-deep)"/>
+          <path d="M22.5 4 L26 8 L30.5 1.5" style="fill:none;stroke:var(--verified);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"/>
+        </svg>
+        <div class="brand-mark">Know<span>How</span></div>
+        <div class="brand-tag">Overseas&nbsp;Indian&nbsp;Services&nbsp;Directory</div>
+      </div>
+      <div class="masthead-meta">
+        <span>Entries curated: <strong class="mono">20</strong></span>
+        <span>Snapshot verified: <strong class="mono" id="verifiedDate">27 Aug 2026</strong></span>
+      </div>
+    </div>
+    <p class="masthead-lede">
+      A link to a government portal isn't enough on its own &mdash; so every entry here also walks through
+      the actual steps, documents, and conditions to get it done: not just where to go, but the know-how
+      to get it done once you're there. A single map for the paperwork of living abroad while staying an
+      Indian citizen &mdash; passports, OCI, voting rights, emergencies, taxes.
+    </p>
+    <div class="country-rail">
+      <span class="country-chip active">🇮🇳 India &mdash; live</span>
+      <span class="country-chip soon">🇵🇭 Philippines &mdash; planned</span>
+      <span class="country-chip soon">🇵🇰 Pakistan &mdash; planned</span>
+      <span class="country-chip soon">🇧🇩 Bangladesh &mdash; planned</span>
+      <span class="country-chip soon">🇳🇬 Nigeria &mdash; planned</span>
+      <span class="country-chip soon">+ suggest one</span>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="controls-inner">
+    <label class="search-box">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="searchInput" type="text" placeholder="Search “lost passport”, “PCC”, “vote from abroad”…" autocomplete="off">
+    </label>
+    <div class="filter-chips" id="filterChips">
+      <button class="chip active" data-filter="all">ALL</button>
+      <button class="chip" data-filter="emergency">EMERGENCY</button>
+      <button class="chip" data-filter="passport">PASSPORT</button>
+      <button class="chip" data-filter="citizenship">OCI &amp; CITIZENSHIP</button>
+      <button class="chip" data-filter="consular">EMBASSY &amp; HELP</button>
+      <button class="chip" data-filter="documents">DOCUMENTS</button>
+      <button class="chip" data-filter="voting">VOTING</button>
+      <button class="chip" data-filter="work">WORK &amp; EMIGRATION</button>
+      <button class="chip" data-filter="finance">TAX &amp; BANKING</button>
+    </div>
+    <span class="result-count" id="resultCount">20 of 20 shown</span>
+  </div>
+</div>
+
+<main>
+
+  <section class="section" data-section="emergency">
+    <div class="section-head"><h2>Emergency</h2><span class="section-count">5</span></div>
+    <p class="section-note">For the situations you hope you'll never need — an arrest, a death abroad, a country turning unsafe overnight, or just needing a human on the phone right now.</p>
+    <div class="grid">
+
+      <article class="card card-emergency" data-cat="emergency" data-title="24/7 distress helpline owrc emergency contact phone unpaid wages passport withheld">
+        <div class="card-top"><h3>24/7 distress helpline (OWRC)</h3><span class="badge">Official</span></div>
+        <p>The Overseas Workers Resource Centre is the first call for anything urgent — a passport held by an employer, unpaid wages, unsafe working conditions, or needing a legal or medical referral right now. It covers the pre-departure and reintegration stages too, not only people already abroad.</p>
+        <div class="card-meta"><span>Handles: <b>round-the-clock contact · legal/medical referral</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Call, email or message OWRC or your nearest mission's emergency line as soon as the problem starts — don't wait to see if it resolves itself.</li>
+                <li>Describe the situation clearly: employer, location, and what's happened (wages withheld, passport taken, unsafe housing).</li>
+                <li>OWRC or the mission logs the case and connects you to the right help — legal, medical, shelter, or a labour dispute officer.</li>
+                <li>Keep any evidence (contract, messages, payslips) — you'll likely be asked for it later.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Passport/ID details</li>
+                <li>Current location and a working contact number</li>
+                <li>Employer or agent's name, if relevant</li>
+                <li>Any written proof of the issue (contract, messages, payslips)</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">This is a support line, not a police line — for immediate physical danger, contact local emergency services first, then OWRC.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://www.owrc.in" target="_blank" rel="noopener">↗ OWRC — current helpline &amp; contact details</a>
+          <a href="https://www.mea.gov.in/owrc-and-pbsk" target="_blank" rel="noopener">↗ Background — mea.gov.in</a>
+        </div>
+      </article>
+
+      <article class="card card-emergency" data-cat="emergency" data-title="arrested detained abroad consular access lawyer jail prison">
+        <div class="card-top"><h3>Arrested or detained abroad</h3><span class="badge">Official</span></div>
+        <p>You can ask local authorities to inform the nearest Indian mission and to arrange a consular visit. The mission can't secure a release, but it will visit, share a list of local lawyers, and keep your family back home informed.</p>
+        <div class="card-meta"><span>Handles: <b>consular access · lawyer referrals · family liaison</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Ask the arresting authority, clearly and immediately, to notify the Indian mission — this is a right under the Vienna Convention on Consular Relations.</li>
+                <li>Avoid signing anything you don't fully understand until a lawyer or consular officer has seen it.</li>
+                <li>Once notified, the mission normally arranges a consular visit and shares a list of local lawyers.</li>
+                <li>Ask a family member or friend to also inform the mission directly, in case the official notification is delayed.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Passport number and full name</li>
+                <li>Name/location of the detaining authority</li>
+                <li>A contact for next of kin</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">The mission can't get someone released or intervene in a country's legal process — it monitors welfare, ensures fair treatment, and keeps family informed.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://www.mea.gov.in/indians-imprisoned-abroad" target="_blank" rel="noopener">↗ Indians imprisoned abroad — mea.gov.in</a>
+        </div>
+      </article>
+
+      <article class="card card-emergency" data-cat="emergency" data-title="death abroad mortal remains death certificate repatriation body">
+        <div class="card-top"><h3>Death abroad: certificates &amp; mortal remains</h3><span class="badge">Official</span></div>
+        <p>Missions can help register a death with local authorities, put together the paperwork India will accept, and coordinate sending mortal remains home. Where a family can't cover the cost, the Community Welfare Fund below can help fund the repatriation.</p>
+        <div class="card-meta"><span>Handles: <b>death certificate · repatriation · ICWF funding</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>The local authority or hospital issues a local death certificate first — nothing else can proceed without it.</li>
+                <li>Register the death with the nearest Indian mission, in person or via India's consular services portal where available.</li>
+                <li>The mission attests the death certificate; once a funeral home issues embalming/health clearance, it issues a No-Objection Certificate for the remains to travel.</li>
+                <li>If cost is the barrier, ask the mission about ICWF support for repatriation (see Embassy &amp; consular help below).</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Deceased's passport and local death certificate</li>
+                <li>Informant's ID and proof of relationship</li>
+                <li>Embalming/health certificate, for repatriation of remains</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">Repatriating a body is paperwork- and time-heavy — expect days, not hours. The mission's consular section coordinates it, not the funeral home.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://www.mea.gov.in/transfer-of-mortal-remains" target="_blank" rel="noopener">↗ Transfer of mortal remains — mea.gov.in</a>
+        </div>
+      </article>
+
+      <article class="card card-emergency" data-cat="emergency" data-title="crisis evacuation travel advisory war conflict natural disaster operation ganga sindhu">
+        <div class="card-top"><h3>Crisis advisories &amp; evacuation</h3><span class="badge">Official</span></div>
+        <p>When a country turns unsafe — conflict, unrest, a natural disaster — the mission posts a travel advisory and, in a full evacuation, registers and moves Indian nationals out first, as in Operation Ganga or Operation Sindhu. Checking this page and following your mission's channels is the fastest way to know what's happening.</p>
+        <div class="card-meta"><span>Handles: <b>live advisories · evacuation registration</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Check the MEA travel advisories page for your country as soon as tensions or a disaster start making news.</li>
+                <li>Register your presence with the nearest mission if it asks — often a simple online form during a crisis — this is how you get found for evacuation flights.</li>
+                <li>Follow the mission's social media/website for real-time instructions rather than general news.</li>
+                <li>Keep your passport, some cash, and essential documents together and reachable.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Passport details</li>
+                <li>Current address/location</li>
+                <li>A working phone number</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">Evacuation operations (like Operation Ganga or Operation Sindhu) are announced during the crisis itself — there's no pre-registration list to join in advance.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://www.mea.gov.in/travel-advisories" target="_blank" rel="noopener">↗ Travel advisories — mea.gov.in</a>
+        </div>
+      </article>
+
+      <article class="card card-emergency" data-cat="emergency" data-title="find helpline number tele inquiry directory mission emergency contact">
+        <div class="card-top"><h3>Find the right helpline number</h3><span class="badge">Official</span></div>
+        <p>Every mission publishes its own emergency line, and MEA keeps a directory of tele-inquiry numbers by subject in Delhi. If a card on this page doesn't have the exact number you need, start here rather than guessing at one.</p>
+        <div class="card-meta"><span>Handles: <b>helpline directory · by-subject inquiry</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Start at MEA's tele-inquiry directory to find the right desk for your subject (passport, OCI, grievance, etc).</li>
+                <li>If it's mission-specific, check that mission's own "Contact/Consular" page for a direct local number.</li>
+                <li>If nothing fits, MADAD (see Embassy &amp; consular help below) is the fallback for anything without an obvious number.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">Save the number for your specific mission once you find it — during a crisis, mission-specific lines get through faster than the general Delhi ones.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://www.mea.gov.in/contact-tele-inquiry" target="_blank" rel="noopener">↗ Tele-inquiry directory — mea.gov.in</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="section" data-section="passport">
+    <div class="section-head"><h2>Passport</h2><span class="section-count">3</span></div>
+    <p class="section-note">Everything about the little navy booklet itself: getting a new one, replacing a lost one, or getting cleared for a police check abroad.</p>
+    <div class="grid">
+
+      <article class="card" data-cat="passport" data-title="passport renewal reissue fresh apply">
+        <div class="card-top"><h3>Passport renewal &amp; reissue</h3><span class="badge">Official</span></div>
+        <p>Renew an expiring passport, replace a full booklet, or update details (address, name, appearance) while living outside India. Applications for those abroad are filed through the Passport Seva system at your nearest Indian Mission, or an outsourced centre (VFS/BLS) where the mission uses one.</p>
+        <div class="card-meta"><span>Handles: <b>renewal · reissue · minors</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Register a new account on the Passport Seva portal for your mission — use a fresh email even if you've used the portal in India before.</li>
+                <li>Fill the reissue application online, upload your documents, and pay the fee.</li>
+                <li>Book an appointment — directly if your mission runs its own Passport Seva Kendra, or through the outsourced VFS/BLS centre it uses.</li>
+                <li>Attend in person with the printed application and original documents; photo and biometrics are captured there.</li>
+                <li>Track your Application Reference Number (ARN) online until the new passport is ready for collection or courier.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Current or expired passport</li>
+                <li>Passport-size photo to spec</li>
+                <li>Proof of current overseas address (residence permit, utility bill, or visa)</li>
+                <li>Self-attested copies of the old passport</li>
+                <li>For minors: birth certificate and parental ID/consent</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">Apply for reissue as soon as your passport has under a year of validity left — many countries refuse entry or visas on a passport nearing expiry.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://www.passportindia.gov.in/psp/Apply" target="_blank" rel="noopener">↗ Apply — Passport Seva (passportindia.gov.in)</a>
+          <a href="https://mportal.passportindia.gov.in/mission/" target="_blank" rel="noopener">↗ Find your mission's passport centre</a>
+          <a href="https://portal2.passportindia.gov.in/AppOnlineProject/fee/feeInput" target="_blank" rel="noopener">↗ Current fee calculator</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="passport" data-title="lost stolen damaged passport emergency certificate">
+        <div class="card-top"><h3>Lost, stolen or damaged passport</h3><span class="badge">Official</span></div>
+        <p>Report the loss to local police first, then apply to your nearest mission for a replacement or, if you need to travel home urgently and there's no time for a full reissue, an Emergency Certificate valid for a single trip to India.</p>
+        <div class="card-meta"><span>Handles: <b>police report · reissue · emergency travel</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>File a police report (FIR) with local police first — you'll need this for everything that follows.</li>
+                <li>Apply on the Passport Seva portal for a replacement, selecting "lost/damaged" as the reason.</li>
+                <li>If you need to travel urgently and there's no time for a full reissue, ask the mission about an Emergency Certificate instead.</li>
+                <li>Attend your appointment with the police report, an affidavit of loss, and any ID you still have.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Police report / FIR copy</li>
+                <li>Affidavit of loss</li>
+                <li>Photocopy of the lost passport, if you have one</li>
+                <li>Passport photos and proof of address</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">Tatkaal (fast-track) service usually isn't available for lost/damaged cases — budget extra time.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://www.mea.gov.in" target="_blank" rel="noopener">↗ Locate your mission's consular page</a>
+          <a href="https://www.passportindia.gov.in/psp/Apply" target="_blank" rel="noopener">↗ File a lost/damaged passport application</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="passport" data-title="police clearance certificate pcc foreign employment">
+        <div class="card-top"><h3>Police Clearance Certificate (PCC)</h3><span class="badge">Official</span></div>
+        <p>Needed for foreign employment, long-term visas, permanent residency or citizenship applications abroad. Indians already living overseas apply through the Passport Seva portal or their mission's PCC service rather than through India's local police.</p>
+        <div class="card-meta"><span>Handles: <b>PR/visa proof · employer verification</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Start on the Passport Seva portal for missions and choose your country/region.</li>
+                <li>Register and fill the PCC application with your passport and current address details.</li>
+                <li>Submit the form and documents to your mission — online upload or in person, depending on the mission.</li>
+                <li>The mission forwards it for background verification in India — this is usually the longest step.</li>
+                <li>Collect the certificate in person, or request postal delivery once it's ready.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Self-attested copies of your passport (bio page, last two pages, ECR/observations page)</li>
+                <li>Proof of current residency abroad</li>
+                <li>Proof of purpose — job offer, visa application, or PR application</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">Apply well ahead of when you actually need it — verification often takes several weeks, longer than most other services here.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://www.passportindia.gov.in" target="_blank" rel="noopener">↗ Passport Seva — PCC application</a>
+          <a href="https://www.cgisf.gov.in/page/pcc-police-clearance-certificate-foreign-nationals/" target="_blank" rel="noopener">↗ Example mission PCC guidance (San Francisco)</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="section" data-section="citizenship">
+    <div class="section-head"><h2>OCI &amp; citizenship</h2><span class="section-count">3</span></div>
+    <p class="section-note">For anyone who has taken, or is considering, another country's citizenship while wanting to keep ties to India.</p>
+    <div class="grid">
+
+      <article class="card" data-cat="citizenship" data-title="oci card new application overseas citizen of india">
+        <div class="card-top"><h3>New OCI card</h3><span class="badge">Official</span></div>
+        <p>The Overseas Citizen of India card gives a lifelong multiple-entry visa and most of the rights of an Indian citizen (short of voting and government jobs) to those of Indian origin who have taken foreign citizenship. Applied for entirely online.</p>
+        <div class="card-meta"><span>Handles: <b>eligibility · new application · document list</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Check eligibility — broadly, former Indian citizens, their children/grandchildren, or foreign spouses of Indian citizens/OCI holders married 2+ years.</li>
+                <li>Fill the application at ociservices.gov.in and upload documents plus a photo in the required format (square, plain background).</li>
+                <li>Submit the originals in person at your jurisdictional mission/FRRO — no printouts needed, they scan the originals.</li>
+                <li>Give biometrics (fingerprints and photo) at the mission — required for everyone except under-12s and over-70s.</li>
+                <li>Wait roughly 30 days from acknowledgement; the mission emails you about any missing documents.</li>
+                <li>Collect the registration booklet in person, or authorise someone to collect it with your passport.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Valid passport (6+ months validity) and naturalisation certificate</li>
+                <li>Proof of Indian origin (old Indian passport, or parents'/grandparents' documents)</li>
+                <li>Proof of current address</li>
+                <li>Photograph to spec (square, min. 51×51mm, plain background)</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">People with Pakistani or Bangladeshi ancestry are not eligible for OCI, regardless of other qualifying criteria.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://ociservices.gov.in" target="_blank" rel="noopener">↗ Apply — ociservices.gov.in</a>
+          <a href="https://ociservices.gov.in/onlineOCI/faq" target="_blank" rel="noopener">↗ OCI eligibility FAQ</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="citizenship" data-title="oci renewal reissue mandatory update age 20 50">
+        <div class="card-top"><h3>OCI renewal / reissue</h3><span class="badge">Official</span></div>
+        <p>An OCI card must be re-issued alongside a new passport if you were under 20 when it was first issued, and once more after you turn 50 — it isn't automatic. Miscellaneous services also cover a lost card, spelling corrections and a new-passport update.</p>
+        <div class="card-meta"><span>Handles: <b>mandatory milestones · lost card · corrections</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Check whether you've hit a mandatory milestone — a new passport issued before age 20, or turning 50 — either one triggers a required OCI reissue.</li>
+                <li>Log in to ociservices.gov.in and select the miscellaneous services / reissue option.</li>
+                <li>Upload your new passport details and any changed information.</li>
+                <li>Submit at your mission along with the old OCI card for updating.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Current OCI card</li>
+                <li>New passport and passport photo</li>
+                <li>Proof of the triggering event (new passport bio page)</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">This isn't automatic — many people only find out they needed to do this when it causes a problem at Indian immigration.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://ociservices.gov.in/onlineOCI/miscFAQs" target="_blank" rel="noopener">↗ OCI miscellaneous services FAQ</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="citizenship" data-title="surrender indian passport renunciation certificate foreign citizenship">
+        <div class="card-top"><h3>Surrender passport &amp; renunciation certificate</h3><span class="badge">Official</span></div>
+        <p>Indian law requires surrendering your Indian passport once you take another country's citizenship. Doing this promptly at your mission — often alongside an OCI application in the same visit — avoids penalties if you're later found still holding it.</p>
+        <div class="card-meta"><span>Handles: <b>surrender · renunciation certificate</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Fill the Surrender of Indian Passport Certificate form (or the "without passport" declaration plus a loss affidavit if you no longer have it).</li>
+                <li>Gather proof of your new foreign citizenship.</li>
+                <li>Submit to your mission, often via VFS/BLS, ideally in the same visit as an OCI application.</li>
+                <li>Wait roughly 1–3 weeks for processing; the passport is stamped "cancelled due to acquiring foreign nationality."</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Original Indian passport (or a loss affidavit if you no longer have it)</li>
+                <li>Proof of foreign citizenship</li>
+                <li>Passport photos</li>
+                <li>For minors: parental consent form</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">Indian law requires this — holding onto an Indian passport after taking another citizenship can create real complications later, even if you never intend to use it.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://www.hcilondon.gov.in/page/consular-information/" target="_blank" rel="noopener">↗ Example mission guidance (London)</a>
+          <a href="https://ociservices.gov.in" target="_blank" rel="noopener">↗ Pair with an OCI application</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="section" data-section="consular">
+    <div class="section-head"><h2>Embassy &amp; consular help</h2><span class="section-count">4</span></div>
+    <p class="section-note">The standing channels for ongoing problems and formal support — as distinct from the acute, right-now situations above.</p>
+    <div class="grid">
+
+      <article class="card" data-cat="consular" data-title="find your high commission embassy consulate directory">
+        <div class="card-top"><h3>Find your High Commission / Consulate</h3><span class="badge">Official</span></div>
+        <p>The Ministry of External Affairs maintains the master directory of every Indian embassy, high commission and consulate abroad, with addresses, phone lines and jurisdiction maps for each.</p>
+        <div class="card-meta"><span>Handles: <b>address · phone · jurisdiction</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to use it</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Go to the MEA missions directory and search by country or city.</li>
+                <li>Note both your nearest mission and its specific jurisdiction — some countries have multiple consulates, each covering different regions.</li>
+                <li>Save its direct contact page, not just the general mea.gov.in number.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">Bookmark this before you need it — searching for it during an actual emergency wastes time.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://www.mea.gov.in" target="_blank" rel="noopener">↗ mea.gov.in — Indian Missions Abroad</a>
+          <a href="https://igod.gov.in/int/INMISS/organizations" target="_blank" rel="noopener">↗ Government directory listing (igod.gov.in)</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="consular" data-title="madad portal grievance complaint consular">
+        <div class="card-top"><h3>MADAD — file a consular complaint</h3><span class="badge">Official</span></div>
+        <p>MADAD is the MEA's online grievance-tracking system for overseas Indians: passport delays, mission non-response, employer disputes and more, logged and tracked to resolution instead of sent into a general inbox.</p>
+        <div class="card-meta"><span>Handles: <b>grievance tracking · status updates</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Register at the MADAD portal with your name, date of birth, mobile number and email.</li>
+                <li>Verify your account via the confirmation link emailed to you.</li>
+                <li>File your grievance — for yourself or someone else — choosing the closest matching category (imprisonment, unpaid wages, mortal remains, and so on).</li>
+                <li>Save the reference number you're given and track status online.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Basic ID details</li>
+                <li>A clear description of the issue</li>
+                <li>Any supporting documents (contract, correspondence)</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">Cases are colour-coded by how long they've been open and escalate automatically up the chain — a MADAD complaint tends to get more traction than an email to a generic inbox.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://www.mea.gov.in/consular-complaints-and-grievances" target="_blank" rel="noopener">↗ File on MADAD via mea.gov.in</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="consular" data-title="indian community welfare fund icwf emergency financial assistance">
+        <div class="card-top"><h3>Indian Community Welfare Fund (ICWF)</h3><span class="badge">Official</span></div>
+        <p>Emergency, need-based assistance run through missions: repatriating stranded or destitute workers, funding return of a body, legal aid, and shelter for women in distress — not a loan scheme, a genuine safety net for those with nowhere else to turn.</p>
+        <div class="card-meta"><span>Handles: <b>repatriation · legal aid · shelter</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Contact your nearest mission directly — there's no separate online application; a consular officer assesses each case individually.</li>
+                <li>Explain the emergency clearly: what's happened and what kind of help you need (lodging, airfare home, legal aid, medical care, repatriation).</li>
+                <li>An officer at the mission assesses eligibility and, if approved, arranges the specific assistance.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Proof you entered the country legally (passport/visa)</li>
+                <li>Whatever documents relate to the emergency itself</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">OCI and PIO cardholders generally aren't eligible for individual ICWF assistance — it's specifically for Indian citizens/passport holders in distress.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://www.mea.gov.in/icwf" target="_blank" rel="noopener">↗ ICWF details — mea.gov.in</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="consular" data-title="pravasi bharatiya sahayata kendra helpline gulf workers">
+        <div class="card-top"><h3>Pravasi Bharatiya Sahayata Kendra</h3><span class="badge">Official</span></div>
+        <p>Walk-in help desks at missions in several Gulf countries for workers in distress — unpaid salaries, passport confiscation by an employer, or exploitative contracts — staffed for exactly this kind of case.</p>
+        <div class="card-meta"><span>Handles: <b>labour disputes · in-person help desks</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to use it</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Locate the nearest Kendra via the mission page — these exist mainly in Gulf countries with large numbers of Indian workers.</li>
+                <li>Walk in during opening hours, or call ahead if the situation is urgent.</li>
+                <li>Describe the labour dispute or distress situation — passport confiscation, unpaid wages, an exploitative contract.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Passport copy, if you have one</li>
+                <li>Any contract or correspondence with your employer</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">These desks exist because many workers can't easily travel to a full mission — check whether one covers your city before assuming you need to go to the capital.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://www.mea.gov.in/pravasi-bhartya-kendra.htm" target="_blank" rel="noopener">↗ Kendra locations — mea.gov.in</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="section" data-section="documents">
+    <div class="section-head"><h2>Documents &amp; certification</h2><span class="section-count">2</span></div>
+    <p class="section-note">Getting Indian paperwork recognised abroad, and staying registered for the certificates that keep pensions and family records current.</p>
+    <div class="grid">
+
+      <article class="card" data-cat="documents" data-title="apostille attestation mea documents education degree">
+        <div class="card-top"><h3>Apostille &amp; attestation</h3><span class="badge">Official</span></div>
+        <p>Degrees, marriage certificates and other Indian documents usually need an MEA apostille (for Hague Convention countries) or full attestation before a foreign government, employer or university will accept them.</p>
+        <div class="card-meta"><span>Handles: <b>education · personal · commercial docs</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Get the document attested at the right state-level authority first — the HRD department for education certificates, Home Department/GAD for personal certificates (birth, marriage, death), or the Chamber of Commerce for commercial documents.</li>
+                <li>Once state attestation is done, submit to an MEA-outsourced collection centre — MEA no longer takes walk-ins directly for most document types.</li>
+                <li>MEA affixes the apostille sticker and returns the document through the same centre.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Original document plus a photocopy</li>
+                <li>Passport copy and proof of address</li>
+                <li>The state-attestation certificate from step 1</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">An apostille only works for countries in the Hague Apostille Convention — for a non-member country you need full embassy attestation instead, a separate and longer process.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://www.mea.gov.in/apostille-menu" target="_blank" rel="noopener">↗ Apostille process — mea.gov.in</a>
+        </div>
+      </article>
+
+      <article class="card" data-cat="documents" data-title="life certificate pensioners jeevan pramaan">
+        <div class="card-top"><h3>Life certificate for pensioners</h3><span class="badge">Official</span></div>
+        <p>NRI pensioners must submit an annual life certificate to keep an Indian pension running. It can be digitally verified through Jeevan Pramaan, or attested in person at a mission where digital verification isn't available.</p>
+        <div class="card-meta"><span>Handles: <b>annual renewal · digital or in-person</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Simplest route: submit a Digital Life Certificate via Jeevan Pramaan using your Aadhaar number and registered mobile — no travel needed if this works for you.</li>
+                <li>If your pension-disbursing bank is on the RBI's approved list, its local branch or a bank officer abroad can sign the certificate instead.</li>
+                <li>Otherwise, get it signed by a notary, magistrate, banker, or Indian mission official, then send it to your pension-disbursing bank/authority in India yourself or through an authorised agent.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Aadhaar number linked to your pension account, and registered mobile number</li>
+                <li>Or your Pension Payment Order (PPO) details, for the offline route</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">This has to be done every year — missing it can pause your pension until it's submitted.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://jeevanpramaan.gov.in" target="_blank" rel="noopener">↗ Jeevan Pramaan — digital life certificate</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="section" data-section="voting">
+    <div class="section-head"><h2>Voting rights</h2><span class="section-count">1</span></div>
+    <p class="section-note">Indian citizens abroad keep their vote — it just has to be registered from outside the country.</p>
+    <div class="grid">
+
+      <article class="card" data-cat="voting" data-title="nri overseas voter registration form 6a election commission">
+        <div class="card-top"><h3>Register as an overseas elector</h3><span class="badge">Official</span></div>
+        <p>Indian citizens who haven't taken another country's citizenship can register to vote from their home constituency using Form 6A on the Election Commission's portal — you still have to be physically present in India to cast the ballot.</p>
+        <div class="card-meta"><span>Handles: <b>Form 6A · constituency mapping</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Confirm you qualify: Indian citizen, 18 or older, and haven't taken another country's citizenship.</li>
+                <li>Get Form 6A from the Election Commission's site.</li>
+                <li>Fill in your passport details and the Indian address that determines your voting constituency.</li>
+                <li>Submit online via NVSP with scanned documents, or send/hand it to your nearest mission.</li>
+                <li>Once approved, you're added to the electoral roll for that constituency — you still vote in person at that specific polling station in India.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Passport-size photo</li>
+                <li>Self-attested passport pages (photo/detail page plus a valid visa page)</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">There's no postal or online voting for NRIs yet — registration only gets you onto the roll; casting the vote still means being physically present in India on polling day.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://www.nvsp.in" target="_blank" rel="noopener">↗ Register — nvsp.in</a>
+          <a href="https://eci.gov.in" target="_blank" rel="noopener">↗ Election Commission of India</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="section" data-section="work">
+    <div class="section-head"><h2>Work &amp; emigration</h2><span class="section-count">1</span></div>
+    <p class="section-note">A step that surprises a lot of first-time workers heading to certain countries.</p>
+    <div class="grid">
+
+      <article class="card" data-cat="work" data-title="ecr emigration clearance emigrate portal gulf countries">
+        <div class="card-top"><h3>Emigration clearance (ECR)</h3><span class="badge">Official</span></div>
+        <p>Passport holders in the "Emigration Check Required" category need clearance before taking up work in a set list of countries, mostly in the Gulf. It's arranged online — no need to visit an emigration office in person.</p>
+        <div class="card-meta"><span>Handles: <b>ECR check · e-Migrate registration</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Register a new account on emigrate.gov.in.</li>
+                <li>Buy Pravasi Bharatiya Bima Yojana (PBBY) insurance from an authorised insurer first — clearance can't be completed without a policy number.</li>
+                <li>Fill in job, employer and destination-country details exactly as they appear in your contract.</li>
+                <li>Upload your passport, visa, and signed employment contract.</li>
+                <li>Pay the processing fee online and wait for the Protector of Emigrants to review it.</li>
+                <li>Download your e-Sticker once approved — this is your emigration clearance.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>Passport scan and passport photo</li>
+                <li>Visa copy and signed employment contract</li>
+                <li>PBBY insurance policy number</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">This only applies if your passport is marked ECR — check the back pages of your passport if you're not sure which category you're in.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://emigrate.gov.in" target="_blank" rel="noopener">↗ e-Migrate — emigrate.gov.in</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="section" data-section="finance">
+    <div class="section-head"><h2>Tax &amp; banking</h2><span class="section-count">1</span></div>
+    <p class="section-note">The paperwork that keeps Indian bank accounts and tax filings compliant once you're a non-resident.</p>
+    <div class="grid">
+
+      <article class="card" data-cat="finance" data-title="nri pan aadhaar linking income tax nre nro banking">
+        <div class="card-top"><h3>PAN, tax filing &amp; NRE/NRO basics</h3><span class="badge">Official</span></div>
+        <p>NRIs are generally exempt from mandatory PAN–Aadhaar linking, but rules have specific conditions worth checking directly. Indian income above the taxable threshold still needs a return filed, and savings held in India should sit in NRE/NRO accounts rather than a resident account.</p>
+        <div class="card-meta"><span>Handles: <b>PAN status · e-filing · FEMA banking rules</b></span></div>
+        <div class="card-detail">
+          <button class="detail-toggle" aria-expanded="false" type="button"><span>How to apply</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="detail-panel" hidden>
+            <div class="detail-block">
+              <h4>Steps</h4>
+              <ol>
+                <li>Confirm your NRI/residential status for the tax year — this determines what income is taxable in India and whether PAN–Aadhaar linking applies to you.</li>
+                <li>If you have taxable Indian income, log in at the Income Tax e-filing portal with your PAN and file the applicable ITR form before the deadline.</li>
+                <li>Open an NRE account (for foreign earnings, fully repatriable) and/or an NRO account (for Indian-sourced income) with a bank offering NRI banking — most accept video KYC, some still require a branch visit.</li>
+                <li>Convert any existing resident savings account to NRO once your status changes — holding a regular resident account as an NRI isn't compliant.</li>
+              </ol>
+            </div>
+            <div class="detail-block">
+              <h4>Usually need</h4>
+              <ul class="doc-list">
+                <li>PAN and passport</li>
+                <li>Overseas address proof and visa/residence permit copy</li>
+                <li>Passport photos</li>
+                <li>For tax filing: income details and any foreign tax paid, for DTAA relief</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Good to know</h4>
+              <p class="condition-note">Rules on PAN–Aadhaar linking and taxable thresholds change fairly often — check the e-filing portal directly rather than going by an old article.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-links">
+          <a href="https://www.incometax.gov.in" target="_blank" rel="noopener">↗ Income Tax e-filing portal</a>
+          <a href="https://www.rbi.org.in" target="_blank" rel="noopener">↗ RBI — NRI account &amp; FEMA rules</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <p class="no-results" id="noResults">No entries match that search. Try a shorter word, or clear the filter above.</p>
+
+  <div class="notice">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <div>
+      <h4>Independent directory, not a government site</h4>
+      <p>KnowHow is a community-curated index of links to official Indian government and mission sources — it is not run by, or affiliated with, the Ministry of External Affairs or any Indian mission. Procedures, fees and eligibility rules change; always complete the actual transaction on the official portal linked from each card. Spot something outdated? Use the "Report outdated info" link on that card — it's checked against the official source before anything changes.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>KnowHow — India edition, prototype build. Next: Philippines, Bangladesh, Nigeria.</span>
+    <span>Sources cross-checked against <a href="https://www.mea.gov.in" target="_blank" rel="noopener">mea.gov.in</a>, <a href="https://www.passportindia.gov.in" target="_blank" rel="noopener">passportindia.gov.in</a>, <a href="https://ociservices.gov.in" target="_blank" rel="noopener">ociservices.gov.in</a> and individual mission sites.</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+    var sections = Array.prototype.slice.call(document.querySelectorAll('.section'));
+    var searchInput = document.getElementById('searchInput');
+    var resultCount = document.getElementById('resultCount');
+    var noResults = document.getElementById('noResults');
+    var activeFilter = 'all';
+
+    function applyFilters() {
+      var q = searchInput.value.trim().toLowerCase();
+      var shown = 0;
+
+      cards.forEach(function (card) {
+        var cat = card.getAttribute('data-cat');
+        var haystack = (card.getAttribute('data-title') + ' ' + card.textContent).toLowerCase();
+        var matchesCat = activeFilter === 'all' || cat === activeFilter;
+        var matchesQuery = q === '' || haystack.indexOf(q) !== -1;
+        var visible = matchesCat && matchesQuery;
+        card.style.display = visible ? '' : 'none';
+        if (visible) shown++;
+      });
+
+      sections.forEach(function (section) {
+        var visibleCards = section.querySelectorAll('.card:not([style*="display: none"])');
+        section.style.display = visibleCards.length ? '' : 'none';
+      });
+
+      resultCount.textContent = shown + ' of ' + cards.length + ' shown';
+      noResults.classList.toggle('show', shown === 0);
+    }
+
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chips.forEach(function (c) { c.classList.remove('active'); });
+        chip.classList.add('active');
+        activeFilter = chip.getAttribute('data-filter');
+        applyFilters();
+      });
+    });
+
+    searchInput.addEventListener('input', applyFilters);
+    applyFilters();
+
+    var REPORT_REPO = 'https://github.com/saratkumar/KnowHow';
+    document.querySelectorAll('.card').forEach(function (card) {
+      var links = card.querySelector('.card-links');
+      var titleEl = card.querySelector('h3');
+      if (!links || !titleEl) return;
+      var title = titleEl.textContent.trim();
+      var body = 'Entry: ' + title + '\n\n' +
+        'What looks outdated or wrong?\n\n\n' +
+        'Source that confirms the correction (link, if you have one):\n\n\n' +
+        '— filed from the "Report outdated info" link on knowhow';
+      var a = document.createElement('a');
+      a.className = 'report-link';
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.href = REPORT_REPO + '/issues/new?title=' + encodeURIComponent('Outdated info: ' + title) +
+        '&body=' + encodeURIComponent(body) + '&labels=' + encodeURIComponent('needs-review');
+      a.textContent = '⚑ Report outdated info';
+      links.appendChild(a);
+    });
+
+    document.querySelectorAll('.detail-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var panel = btn.nextElementSibling;
+        var open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+        if (open) { panel.setAttribute('hidden', ''); }
+        else { panel.removeAttribute('hidden'); }
+      });
+    });
+  })();
+</script>

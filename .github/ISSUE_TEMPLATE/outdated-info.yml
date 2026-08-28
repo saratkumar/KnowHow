@@ -1,0 +1,25 @@
+name: Outdated or incorrect info
+description: Flag a KnowHow entry that's wrong, outdated, or links somewhere broken.
+title: "Outdated info: "
+labels: ["needs-review"]
+body:
+  - type: input
+    id: entry
+    attributes:
+      label: Which entry?
+      description: The card title on the site (e.g. "Passport renewal & reissue").
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's wrong or outdated?
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source that confirms the correction (if you have one)
+      description: A link to the official page showing the current, correct information.
+    validations:
+      required: false

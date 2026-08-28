@@ -52,6 +52,7 @@ jobs:
         run: |
           git config user.name "knowhow-refresh-bot"
           git config user.email "actions@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/saratkumar/KnowHow.git"
           if git diff --quiet -- index.html; then
             echo "No changes — index.html already accurate."
           else

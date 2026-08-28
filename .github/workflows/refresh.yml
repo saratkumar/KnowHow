@@ -3,7 +3,10 @@ name: Refresh KnowHow content
 on:
   schedule:
     # Runs at 03:00 UTC on the 1st of every month. Change the cron expression
-    # to adjust cadence (e.g. "0 3 * * 1" = every Monday).
+    # to adjust cadence (e.g. "0 3 * * 1" = every Monday). Note: GitHub only
+    # fires scheduled workflows on the default branch, and disables the
+    # schedule on public repos after 60 days with no repo activity — a
+    # manual "Run workflow" click (below) re-activates it.
     - cron: "0 3 1 * *"
   workflow_dispatch: {}
     # Lets you trigger a refresh manually from the Actions tab —
@@ -11,6 +14,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   refresh:
@@ -18,19 +22,31 @@ jobs:
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          fetch-depth: 1
 
-      - name: Install dependencies
-        run: pip install anthropic
-
-      - name: Run content refresh
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python scripts/refresh_content.py
+      - name: Ask Claude to verify and refresh the content
+        uses: anthropics/claude-code-action@v1
+        with:
+          # Uses your Claude subscription (via `claude setup-token`) rather
+          # than separate API billing.
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Re-verify every entry in index.html against its official government
+            source using web search. Update only what has actually changed:
+            dead or moved links, outdated steps/documents/eligibility
+            conditions, or facts that are simply wrong. Preserve the HTML
+            structure, CSS, JavaScript, design, and all 20 cards exactly as
+            they are otherwise — do not redesign, reorder, or rewrite
+            anything that doesn't need a factual correction. Always update
+            the text inside id="verifiedDate" to today's real date, in the
+            same "27 Aug 2026"-style format already used, even if nothing
+            else changed. Edit index.html directly in place using the Edit
+            tool. If something needs a human judgment call rather than a
+            factual fix, leave it alone and just say so in your final reply.
+          claude_args: |
+            --max-turns 60
+            --allowedTools "Read,Edit,WebSearch,WebFetch"
 
       - name: Commit and push if changed
         run: |

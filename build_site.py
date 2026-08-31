@@ -867,10 +867,45 @@ def render_shell():
 
     total_entries = len(ENTRIES)
 
+    site_url = "https://uthavi.org/"
+    site_title = "Uthavi — Free Help for Overseas Indians: Passport, OCI, Visa & Singapore Permits"
+    site_desc = ("Uthavi is a free, multi-language directory for Indians living abroad — real steps, "
+                 "documents and current rules for passport renewal, OCI cards, voting from abroad, "
+                 "emergencies, taxes, and Singapore work permits (EP, S Pass, Work Permit). "
+                 "No login, no fees, no ads.")
+    site_keywords = ("OCI renewal, Indian passport abroad, NRI services, overseas Indian services, "
+                      "Singapore work permit for Indians, EP S Pass Singapore, vote from abroad India, "
+                      "Indian diaspora Singapore, PIO OCI card, Indian mission consular services")
+    og_image = site_url + "og-image.png"
+
     doc = []
     doc.append('<meta charset="utf-8">')
     doc.append('<meta name="viewport" content="width=device-width, initial-scale=1">')
-    doc.append('<title>Uthavi</title>')
+    doc.append('<title>%s</title>' % e(site_title))
+    doc.append('<meta name="description" content="%s">' % e(site_desc))
+    doc.append('<meta name="keywords" content="%s">' % e(site_keywords))
+    doc.append('<link rel="canonical" href="%s">' % e(site_url))
+    doc.append('<meta name="robots" content="index, follow">')
+    # Open Graph (also drives WhatsApp / Facebook / LinkedIn link previews)
+    doc.append('<meta property="og:type" content="website">')
+    doc.append('<meta property="og:site_name" content="Uthavi">')
+    doc.append('<meta property="og:title" content="%s">' % e(site_title))
+    doc.append('<meta property="og:description" content="%s">' % e(site_desc))
+    doc.append('<meta property="og:url" content="%s">' % e(site_url))
+    doc.append('<meta property="og:image" content="%s">' % e(og_image))
+    doc.append('<meta property="og:image:width" content="1200">')
+    doc.append('<meta property="og:image:height" content="630">')
+    doc.append('<meta property="og:locale" content="en_IN">')
+    doc.append('<meta name="twitter:card" content="summary_large_image">')
+    doc.append('<meta name="twitter:title" content="%s">' % e(site_title))
+    doc.append('<meta name="twitter:description" content="%s">' % e(site_desc))
+    doc.append('<meta name="twitter:image" content="%s">' % e(og_image))
+    doc.append(
+        '<script type="application/ld+json">'
+        '{"@context":"https://schema.org","@type":"WebSite","name":"Uthavi",'
+        '"url":"%s","description":"%s","inLanguage":["en","hi","ta","te","ml"]}'
+        '</script>' % (site_url, site_desc.replace('"', '\\"'))
+    )
     doc.append('<link rel="preconnect" href="https://fonts.googleapis.com">')
     doc.append('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>')
     # Only the Latin fonts load up front. The four Indic-script families (Devanagari/Tamil/Telugu/Malayalam)
@@ -895,7 +930,7 @@ def render_shell():
     doc.append('</div>')  # .brand
     doc.append('<div class="masthead-meta">'
                 '<span data-i18n="entries_curated">%s</span>: <strong class="mono">%d</strong>'
-                '<span data-i18n="snapshot_verified">%s</span>: <strong class="mono" id="verifiedDate">30 Aug 2026</strong>'
+                '<span data-i18n="snapshot_verified">%s</span>: <strong class="mono" id="verifiedDate">31 Aug 2026</strong>'
                 '</div>' % (e(UI["entries_curated"]["en"]), total_entries, e(UI["snapshot_verified"]["en"])))
     doc.append('</div>')  # .masthead-top
 
